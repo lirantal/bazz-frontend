@@ -1,0 +1,21 @@
+{
+  "name": "bazz-frontend",
+  "version": "0.1.0",
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts build && cra-append-sw --mode dev ./custom-sw.js",
+    "build": "react-scripts build && cra-append-sw --skip-compile ./custom-sw.js",
+    "//start": "react-scripts start",
+    "//build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "cra-append-sw": "^2.0.0"
+  }
+}
