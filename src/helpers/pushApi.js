@@ -1,4 +1,4 @@
-import { urlBase64ToUint8Array } from './util'
+import { urlBase64ToUint8Array } from './util';
 
 /**
  * Prompt the user for notification permission on the browser
@@ -29,12 +29,12 @@ export function requestNotificationPermission() {
  */
 export function checkBrowerCapabilities() {
   if (Notification.permission === 'denied') {
-    return Promise.resolve({allowed: false, reason: 'blocked'})
+    return Promise.resolve({allowed: false, reason: 'blocked'});
   }
 
   // feature detect for push support in browser
   if (!('PushManager' in window)) {
-    return Promise.resolve({allowed: false, reason: 'unsupported'})
+    return Promise.resolve({allowed: false, reason: 'unsupported'});
   }
 
   // feature detect with sw
@@ -50,7 +50,7 @@ export function checkBrowerCapabilities() {
           allowed: true
         };
       }
-  })
+  });
 }
 
 /**
@@ -59,8 +59,8 @@ export function checkBrowerCapabilities() {
 export function getSubscription() {
   return navigator.serviceWorker.ready
     .then((registration) => {
-      return registration.pushManager.getSubscription()
-    })
+      return registration.pushManager.getSubscription();
+    });
 }
 
 /**
@@ -91,7 +91,7 @@ export function subscribePush() {
           'BEo88fXNfsMRFlmISNJD_N68AyvvVGygIco8EzsIGKV9O5EXG1dkY6AB2Ifo9fURKRpSSwJC2vO-88gdtQNW6TE'
         )
       });
-    })
+    });
 }
 
 /**
@@ -104,7 +104,7 @@ export function sendSubscription(subscription, token) {
   const data = {
     subscription,
     token
-  }
+  };
 
   return fetch('/api/subscriptions', {
     method: 'POST',
@@ -128,5 +128,5 @@ export function sendSubscription(subscription, token) {
   })
   .then(() => {
     return subscription
-  })
+  });
 }

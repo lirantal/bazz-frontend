@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { getSubscription, sendSubscription, checkBrowerCapabilities } from './helpers/pushApi'
-import { getToken } from './helpers/util'
 
-import ErrorPage from './components/ErrorPage'
-import LoadingPage from './components/LoadingPage'
-import SubscribePage from './components/SubscribePage'
-import SubscriptionPage from './components/SubscriptionPage'
-import './App.css';
+import { getSubscription, sendSubscription, checkBrowerCapabilities } from './helpers/pushApi';
+import { getToken } from './helpers/util';
+
+import ErrorPage from './components/ErrorPage';
+import LoadingPage from './components/LoadingPage';
+import SubscribePage from './components/SubscribePage';
+import SubscriptionPage from './components/SubscriptionPage';
+
+import { Divider, Segment, Label, Container, Header } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isLoading: true
-    }
+    };
   }
 
   /**
@@ -22,14 +24,14 @@ class App extends Component {
    */
   handleSubscribe = (data) => {
     if (data.failure) {
-      return this.setPageError(data.failure)
+      return this.setPageError(data.failure);
     }
 
     if (data.subscription) {
       return this.setState({
         subscription: data.subscription,
         promptSubsubscription: undefined
-      })
+      });
     }
   }
 
@@ -39,7 +41,7 @@ class App extends Component {
       failure: failure,
       promptSubsubscription: undefined,
       subscription: undefined
-    })
+    });
   }
 
   /**
@@ -47,20 +49,20 @@ class App extends Component {
    * that may already exist in the user's browser
    */
   async componentDidMount() {
-    const token = getToken()
+    const token = getToken();
     if (!token) {
-      return this.setPageError('token')
+      return this.setPageError('token');
     }
 
     // per docs, the promise at `navigator.serviceWorker.ready`
     // never rejects and must resolve or run endlessly
-    const capabilities = await checkBrowerCapabilities()
+    const capabilities = await checkBrowerCapabilities();
     if (capabilities.allowed === false) {
-      return this.setPageError(capabilities.reason)
+      return this.setPageError(capabilities.reason);
     }
 
     // subscription is an object with members of endpoint and keys
-    const subscription = await getSubscription()
+    const subscription = await getSubscription();
     
     // if we have a push subscription, we can register on the application server
     if (subscription) {
@@ -70,37 +72,52 @@ class App extends Component {
           isLoading: false,
           subscription: subscription,
           promptSubsubscription: undefined
-        })
+        });
       } catch (error) {
-        return this.setPageError('server')
+        return this.setPageError('server');
       }
     } else {
       return this.setState({
         isLoading: false,
         runnable: true,
         promptSubsubscription: true
-      })
+      });
     }
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">The Bazz</h1>
-        </header>
-
-        <p className="App-intro">
+      <div>
+        <Segment
+          inverted
+          textAlign='center'
+          style={{ minHeight: 700, padding: '1em 0em' }}
+          vertical
+        >
+          <Container text>
+            <Header
+              as='h5'
+              content='nice to meet you'
+              inverted
+              style={{ fontSize: '1em', fontWeight: 'normal', marginBottom: '0', marginTop: '2em' }}
+            />
+            <Label as='a' size='huge' style={{marginTop: '0.5em'}} image>
+              <img src='http://react.semantic-ui.com/assets/images/avatar/small/elliot.jpg' />
+              I'm bazz
+            </Label>
+          </Container>
+          <Divider inverted style={{paddingTop: '1.2em'}} />
+          <Divider horizontal inverted>
+            your friendly bot
+          </Divider>
           {this.state.isLoading === true && <LoadingPage />}
           {this.state.failure && <ErrorPage failure={this.state.failure} />}
           {this.state.subscription && <SubscriptionPage subscription={this.state.subscription} />}
           {this.state.promptSubsubscription === true && <SubscribePage onSubscribe={this.handleSubscribe} />}
-        </p>
+        </Segment>
       </div>
-    )
+    );
   }
-
 }
 
 export default App;

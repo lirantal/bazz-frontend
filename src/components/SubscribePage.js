@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import { subscribePush, sendSubscription, requestNotificationPermission } from '../helpers/pushApi'
-import { getToken } from '../helpers/util'
-import logo from '../logo.svg';
+import React, { Component } from 'react';
+
+import { subscribePush, sendSubscription, requestNotificationPermission } from '../helpers/pushApi';
+import { getToken } from '../helpers/util';
+
+import { Label, Button, Container, Header } from 'semantic-ui-react';
 
 class SubscribePage extends Component {
   /**
@@ -47,11 +49,29 @@ class SubscribePage extends Component {
 
   render() {
     return (
-      <div> 
-        <button onClick={this.subscribe}>
-          Subscribe
-        </button>
-      </div>
+      <Container textAlign='center' style={{marginTop: '6em'}}>
+          <Label basic size='medium' pointing='below'>
+            You need to hit the button 
+            so I can send you a notification
+            when it's time.
+          </Label>
+        <Container>
+          <Button
+            positive
+            size='massive'
+            onClick={this.subscribe}
+            style={{marginTop: '1em'}}
+          >
+            Notify me!
+          </Button>
+        </Container>
+        <Container style={{marginTop: '6em'}} >
+          <Header inverted as='h5' size='mini'>
+            the browser will prompt you to
+            enable notifications
+          </Header> 
+        </Container>
+      </Container>
     );
   }
 }

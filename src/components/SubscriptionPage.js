@@ -1,19 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Container, Icon, Message } from 'semantic-ui-react';
 
 class SubscriptionPage extends Component {
   render() {
+    // subscription data vailable in
+    // this.props.subscription.endpoint
     return (
-      <div>
-        <p>
-          successfully subscribed
-        </p>
-        <p>
-          your subscription endpoint:
+      <Container textAlign='center' style={{marginTop: '9em'}}>
+        <Message icon color='green'>
+        <Icon name='hand spock' />
+        <Message.Content>
           <p>
-            {this.props.subscription.endpoint}
+            You're all set!
           </p>
-        </p>
-      </div>
+          <p>
+            I will send you a notification when it's time.
+          </p>
+        </Message.Content>
+        </Message>
+      </Container>
     );
   }
 }

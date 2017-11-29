@@ -4,12 +4,14 @@
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.0"
   },
   "scripts": {
-    "start": "react-scripts build && cra-append-sw --mode dev ./custom-sw.js",
+    "//start": "react-scripts build && cra-append-sw --skip-compile --mode dev ./custom-sw.js",
     "build": "react-scripts build && cra-append-sw --skip-compile ./custom-sw.js",
-    "//start": "react-scripts start",
+    "start": "react-scripts start",
     "//build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

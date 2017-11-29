@@ -14,5 +14,5 @@
     const title = 'Bazz up!';
     event.waitUntil(self.registration.showNotification(title));
   });
-})();
+})()
 

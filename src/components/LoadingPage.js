@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Loader } from 'semantic-ui-react';
 
 class LoadingPage extends Component {
   render() {
     return (
-      <div>
-        <p>
-          Loading...
-        </p>
-        <p>
-          checking browser support for Push Notifications
-        </p>
-      </div>
-    )
+      <Loader style={{marginTop: '2em'}} size='large' active inverted>fishing for browser support...</Loader>
+    );
   }
 }
 
