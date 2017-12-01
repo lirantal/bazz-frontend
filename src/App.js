@@ -102,7 +102,10 @@ class App extends Component {
               style={{ fontSize: '1em', fontWeight: 'normal', marginBottom: '0', marginTop: '2em' }}
             />
             <Label as='a' size='huge' style={{marginTop: '0.5em'}} image>
-              <img src='http://react.semantic-ui.com/assets/images/avatar/small/elliot.jpg' />
+              <img 
+                src='http://react.semantic-ui.com/assets/images/avatar/small/elliot.jpg'
+                alt='my name is bazz'
+              />
               I'm bazz
             </Label>
           </Container>
