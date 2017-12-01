@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules 
+script:
+  - npm test
+  - npm run build
+deploy:
+  # deploy only on the master branch
+  on:
+    branch: master
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  region: $AWS_DEFAULT_REGION
+  bucket: www.bazz.ga
+  skip_cleanup: true
+  local_dir: build
+  cache_control: "max-age=300"
