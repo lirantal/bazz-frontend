@@ -1,5 +1,15 @@
 import { urlBase64ToUint8Array } from './util';
 
+const apiBasePath = process.env.REACT_APP_API_BASE_PATH || ''
+const apiStage = process.env.REACT_APP_API_STAGE || ''
+
+let subscriptionUrl
+if (apiBasePath) {
+  subscriptionUrl = `${apiBasePath}/subscriptions/${apiStage}/subscriptions`
+} else {
+  subscriptionUrl = `/api/subscriptions`
+}
+
 /**
  * Prompt the user for notification permission on the browser
  */
@@ -16,11 +26,11 @@ export function requestNotificationPermission() {
       return permission.then(resolve, reject);
     }
   })
-  .then((result) => {
-    if (result !== 'granted') {
-      throw new Error('Notification permission denied');
-    }
-  });
+    .then((result) => {
+      if (result !== 'granted') {
+        throw new Error('Notification permission denied');
+      }
+    });
 }
 
 /**
@@ -29,12 +39,12 @@ export function requestNotificationPermission() {
  */
 export function checkBrowerCapabilities() {
   if (Notification.permission === 'denied') {
-    return Promise.resolve({allowed: false, reason: 'blocked'});
+    return Promise.resolve({ allowed: false, reason: 'blocked' });
   }
 
   // feature detect for push support in browser
   if (!('PushManager' in window)) {
-    return Promise.resolve({allowed: false, reason: 'unsupported'});
+    return Promise.resolve({ allowed: false, reason: 'unsupported' });
   }
 
   // feature detect with sw
@@ -50,7 +60,7 @@ export function checkBrowerCapabilities() {
           allowed: true
         };
       }
-  });
+    });
 }
 
 /**
@@ -106,27 +116,27 @@ export function sendSubscription(subscription, token) {
     token
   };
 
-  return fetch('/api/subscriptions', {
+  return fetch(subscriptionUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Application server error');
-    }
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Application server error');
+      }
 
-    return response.json();
-  })
-  .then((responseData) => {
-    // this response structure is mandated by the spec for push server clients
-    if (!(responseData.data && responseData.data.success)) {
-      throw new Error('Application server response structure error');
-    }
-  })
-  .then(() => {
-    return subscription
-  });
+      return response.json();
+    })
+    .then((responseData) => {
+      // this response structure is mandated by the spec for push server clients
+      if (!(responseData.data && responseData.data.success)) {
+        throw new Error('Application server response structure error');
+      }
+    })
+    .then(() => {
+      return subscription
+    });
 }
