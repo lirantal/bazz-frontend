@@ -6,6 +6,13 @@ Note: the project was scafollded using facebook's [create-react-app](https://git
 
 Note: CRA comes bundled with a generic service worker support that caches files but it's not possible to create custom service worker events, such as one that will listen for push notifications. To support this without ejecting the project, a dependency is introduced called `cra-append-sw` which allows creating a `custom-sw.js` file to register as a service worker that will bundle with the rest of the project once built.
 
+
+# CI
+
+Travis-CI integration is used to test and build the static assets.
+
+When Pull-Requests are merged to the `master` branch, travis will deploy them to an S3 bucket from which they will be served later on by CloudFront.
+
 # Running Locally
 
 ## A local configuration file
@@ -37,3 +44,6 @@ When needed, new keys can be generated and used:
 $ yarn global add web-push
 $ web-push generate-vapid-keys --json
 ```
+
+# Author
+Liran Tal <liran.tal@gmail.com>
