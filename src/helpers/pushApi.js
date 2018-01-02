@@ -110,10 +110,11 @@ export function subscribePush() {
  * @param {object} subscription 
  * @param {string} token 
  */
-export function sendSubscription(subscription, token) {
+export function sendSubscription(subscription, tokenData) {
   const data = {
     subscription,
-    token
+    sub_id: tokenData.sub_id,
+    nonce: tokenData.nonce
   };
 
   return fetch(subscriptionUrl, {
