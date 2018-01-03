@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { getSubscription, sendSubscription, checkBrowerCapabilities } from './helpers/pushApi';
 import { getToken } from './helpers/util';
+import errors from './common/errors';
 
 import ErrorPage from './components/ErrorPage';
 import LoadingPage from './components/LoadingPage';
@@ -26,6 +27,10 @@ class App extends Component {
    * Callback handler for the action when user subscribes
    */
   handleSubscribe = (data) => {
+    if (!data) {
+      return this.setPageError()
+    }
+
     if (data.failure) {
       return this.setPageError(data.failure);
     }
@@ -41,7 +46,7 @@ class App extends Component {
   setPageError = (failure) => {
     return this.setState({
       isLoading: false,
-      failure: failure,
+      failure: failure || errors['error'],
       promptSubsubscription: undefined,
       subscription: undefined
     });
@@ -117,7 +122,7 @@ class App extends Component {
             your friendly bot
           </Divider>
           {this.state.isLoading === true && <LoadingPage />}
-          {this.state.failure && <ErrorPage failure={this.state.failure} />}
+          {<ErrorPage failure={this.state.failure} />}
           {this.state.subscription && <SubscriptionPage subscription={this.state.subscription} />}
           {this.state.promptSubsubscription === true && <SubscribePage onSubscribe={this.handleSubscribe} />}
         </Segment>
