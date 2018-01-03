@@ -65,7 +65,7 @@ class App extends Component {
     // per docs, the promise at `navigator.serviceWorker.ready`
     // never rejects and must resolve or run endlessly
     const capabilities = await checkBrowerCapabilities();
-    if (capabilities.allowed === false) {
+    if (!capabilities || capabilities.allowed === false) {
       return this.setPageError(capabilities.reason);
     }
 

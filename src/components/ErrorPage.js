@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Message, Segment } from 'semantic-ui-react';
 import errors from '../common/errors';
 
@@ -14,7 +15,7 @@ class ErrorPage extends Component {
     }
 
     return (
-      <Segment inverted baseic style={{ marginTop: '7em' }}>
+      <Segment inverted basic style={{ marginTop: '7em' }}>
         <Message negative>
           <Message.Header>
             Oh my!
@@ -27,5 +28,9 @@ class ErrorPage extends Component {
     );
   }
 }
+
+ErrorPage.propTypes = {
+  failure: PropTypes.string
+};
 
 export default ErrorPage;

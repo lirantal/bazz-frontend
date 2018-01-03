@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Loader } from 'semantic-ui-react';
 
 class LoadingPage extends Component {
@@ -8,5 +10,9 @@ class LoadingPage extends Component {
     );
   }
 }
+
+LoadingPage.propTypes = {
+  isLoading: PropTypes.bool
+};
 
 export default LoadingPage;

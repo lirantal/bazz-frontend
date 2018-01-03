@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { subscribePush, sendSubscription, requestNotificationPermission } from '../helpers/pushApi';
 import { getToken } from '../helpers/util';
@@ -15,6 +16,10 @@ class SubscribePage extends Component {
   subscribe = async (e) => {
     e.preventDefault();
 
+    if (!this.props.onSubscribe || typeof this.props.onSubscribe !== 'function') {
+      return false
+    }
+
     try {
       await requestNotificationPermission();
     } catch (error) {
@@ -22,7 +27,7 @@ class SubscribePage extends Component {
         failure: 'blocked'
       });
     }
-    
+
     let subscription
     try {
       subscription = await subscribePush();
@@ -49,9 +54,9 @@ class SubscribePage extends Component {
 
   render() {
     return (
-      <Container textAlign='center' style={{marginTop: '6em'}}>
-          <Label basic size='medium' pointing='below'>
-            You need to hit the button 
+      <Container textAlign='center' style={{ marginTop: '6em' }}>
+        <Label basic size='medium' pointing='below'>
+          You need to hit the button
             so I can send you a notification
             when it's time.
           </Label>
@@ -60,20 +65,24 @@ class SubscribePage extends Component {
             positive
             size='massive'
             onClick={this.subscribe}
-            style={{marginTop: '1em'}}
+            style={{ marginTop: '1em' }}
           >
             Notify me!
           </Button>
         </Container>
-        <Container style={{marginTop: '6em'}} >
+        <Container style={{ marginTop: '6em' }} >
           <Header inverted as='h5' size='mini'>
             the browser will prompt you to
             enable notifications
-          </Header> 
+          </Header>
         </Container>
       </Container>
     );
   }
 }
+
+SubscribePage.propTypes = {
+  onSubscribe: PropTypes.func
+};
 
 export default SubscribePage;
