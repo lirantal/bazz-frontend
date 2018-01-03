@@ -15,7 +15,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      failure: undefined,
+      subscription: undefined,
+      promptSubsubscription: undefined
     };
   }
 
