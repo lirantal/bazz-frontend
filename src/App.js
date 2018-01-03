@@ -63,7 +63,7 @@ class App extends Component {
 
     // subscription is an object with members of endpoint and keys
     const subscription = await getSubscription();
-    
+
     // if we have a push subscription, we can register on the application server
     if (subscription) {
       try {
@@ -101,15 +101,15 @@ class App extends Component {
               inverted
               style={{ fontSize: '1em', fontWeight: 'normal', marginBottom: '0', marginTop: '2em' }}
             />
-            <Label as='a' size='huge' style={{marginTop: '0.5em'}} image>
-              <img 
-                src='http://react.semantic-ui.com/assets/images/avatar/small/elliot.jpg'
+            <Label as='a' size='huge' style={{ marginTop: '0.5em' }} image>
+              <img
+                src='https://react.semantic-ui.com/assets/images/avatar/small/elliot.jpg'
                 alt='my name is bazz'
               />
               I'm bazz
             </Label>
           </Container>
-          <Divider inverted style={{paddingTop: '1.2em'}} />
+          <Divider inverted style={{ paddingTop: '1.2em' }} />
           <Divider horizontal inverted>
             your friendly bot
           </Divider>
