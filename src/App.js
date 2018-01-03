@@ -121,7 +121,7 @@ class App extends Component {
           <Divider horizontal inverted>
             your friendly bot
           </Divider>
-          {this.state.isLoading === true && <LoadingPage />}
+          {<LoadingPage isLoading={this.state.isLoading} />}
           {<ErrorPage failure={this.state.failure} />}
           {this.state.subscription && <SubscriptionPage subscription={this.state.subscription} />}
           {this.state.promptSubsubscription === true && <SubscribePage onSubscribe={this.handleSubscribe} />}
