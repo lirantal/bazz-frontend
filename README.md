@@ -1,6 +1,6 @@
 # bazz-frontend
 
-The frontend interface for npm's bazz CLI tool.
+The frontend interface for npm's [bazz](https://github.com/lirantal/bazz) CLI tool.
 
 Note: the project was scafollded using facebook's [create-react-app](https://github.com/facebookincubator/create-react-app) without ejecting, so for any project related scripts and maintenance refer to their README.
 
@@ -12,6 +12,13 @@ Note: CRA comes bundled with a generic service worker support that caches files 
 Travis-CI integration is used to test and build the static assets.
 
 When Pull-Requests are merged to the `master` branch, travis will deploy them to an S3 bucket from which they will be served later on by CloudFront.
+
+For the AWS deployment part, the following environment variables need to be available on the CI:
+
+* AWS_ACCESS_KEY_ID
+* AWS_CLOUDFRONT_DISTRIBUTION_ID
+* AWS_DEFAULT_REGION
+* AWS_SECRET_ACCESS_KEY
 
 # Running Locally
 

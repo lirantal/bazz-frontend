@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Message, Segment } from 'semantic-ui-react';
-import errors from '../common/errors';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Message, Segment } from 'semantic-ui-react'
+import errors from '../common/errors'
 
 class ErrorPage extends Component {
-  render() {
+  render () {
     // this.props.failure can be one of:
     // * 'unsupported' - no support from browser
     // * 'blocked' - notifications blocked in browser
     // * 'server' - app server error subscription post error
     // * 'token' - invalid/non-existent use of token
     if (!this.props.failure) {
-      return null
+      return <div />
     }
 
     return (
@@ -19,18 +19,18 @@ class ErrorPage extends Component {
         <Message negative>
           <Message.Header>
             Oh my!
-            </Message.Header>
+          </Message.Header>
           <p>
-            {errors[this.props.failure] || `uh oh...`}
+            {errors[this.props.failure] || errors['error']}
           </p>
         </Message>
       </Segment>
-    );
+    )
   }
 }
 
 ErrorPage.propTypes = {
   failure: PropTypes.string
-};
+}
 
-export default ErrorPage;
+export default ErrorPage
