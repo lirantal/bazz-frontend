@@ -4,18 +4,32 @@ node_js:
 cache:
   directories:
   - node_modules 
+install:
+  # awscli is required for working with S3 and Cloudfront
+  - pip install awscli
+  - yarn install
 script:
-  - npm test
-  - npm run build
+  - yarn run test
+  - yarn run build
 deploy:
   # deploy only on the master branch
   on:
     branch: master
   provider: s3
+  # aws connection details 
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   region: $AWS_DEFAULT_REGION
+  # name of the s3 bucket for which to upload the site bundle
   bucket: www.bazz.ga
+  # prevent travis from deleting the build folder
   skip_cleanup: true
+  # the build directory to upload
   local_dir: build
+  # setting Cache-Control header on the bucket
   cache_control: "max-age=300"
+after_deploy:
+  # need to toggle on this feature of allowing `awscli` to make requests to CloudFront
+  - aws configure set preview.cloudfront true
+  # invalidate every object in the targeted distribution.
+  - aws cloudfront creacte-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
