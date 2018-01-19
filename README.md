@@ -52,5 +52,11 @@ $ yarn global add web-push
 $ web-push generate-vapid-keys --json
 ```
 
+# Related
+
+[bazz-serverless](https://github.com/lirantal/bazz-serverless) - the aws lambda serverless project
+
+[bazz](https://github.com/lirantal/bazz) - the Node.js CLI app
+
 # Author
 Liran Tal <liran.tal@gmail.com>
