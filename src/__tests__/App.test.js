@@ -1,16 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { mount, shallow } from 'enzyme'
+import {mount, shallow} from 'enzyme'
 
 import App from '../App'
 
 // Imported for mocks
-import { getToken } from '../helpers/util'
-import {
-  getSubscription,
-  sendSubscription,
-  checkBrowerCapabilities
-} from '../helpers/pushApi'
+import {getToken} from '../helpers/util'
+import {getSubscription, sendSubscription, checkBrowerCapabilities} from '../helpers/pushApi'
 
 jest.mock('../helpers/util.js', () => {
   return {
@@ -64,7 +60,7 @@ test('handling subscription sets an error state when subscription data is invali
   page.instance().handleSubscribe()
   expect(page.state().failure).toBeTruthy()
 
-  page.instance().handleSubscribe({ failure: 'something' })
+  page.instance().handleSubscribe({failure: 'something'})
   expect(page.state().failure).toEqual('something')
 
   page.unmount()
@@ -73,7 +69,7 @@ test('handling subscription sets an error state when subscription data is invali
 test('handling subscription sets a valid subscription object', () => {
   const page = mount(<App />)
 
-  page.instance().handleSubscribe({ subscription: 'someObject' })
+  page.instance().handleSubscribe({subscription: 'someObject'})
   expect(page.state().failure).toBeFalsy()
   expect(page.state().promptSubsubscription).toBeFalsy()
   expect(page.state().subscription).toEqual('someObject')
@@ -117,7 +113,7 @@ test('upon mounting sets subscription state if able to send subscription to remo
     })
   })
 
-  const mockSubscriptionObject = { endpoint: 'https://www.example.com' }
+  const mockSubscriptionObject = {endpoint: 'https://www.example.com'}
   getSubscription.mockImplementation(() => {
     return mockSubscriptionObject
   })
@@ -182,7 +178,7 @@ test('upon mounting sets show failure if unable to send subscription', async () 
     })
   })
 
-  const mockSubscriptionObject = { endpoint: 'https://www.example.com' }
+  const mockSubscriptionObject = {endpoint: 'https://www.example.com'}
   getSubscription.mockImplementation(() => {
     return Promise.resolve(mockSubscriptionObject)
   })
