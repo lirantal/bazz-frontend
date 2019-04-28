@@ -1,4 +1,4 @@
-import { urlBase64ToUint8Array } from './util'
+import {urlBase64ToUint8Array} from './util'
 
 const apiBasePath = process.env.REACT_APP_API_BASE_PATH || ''
 
@@ -12,7 +12,7 @@ if (apiBasePath) {
 /**
  * Prompt the user for notification permission on the browser
  */
-export function requestNotificationPermission () {
+export function requestNotificationPermission() {
   return new Promise((resolve, reject) => {
     // support for older browsers/spec where requestPermission was
     // using a callback
@@ -35,14 +35,14 @@ export function requestNotificationPermission () {
  * Checks whether we have all the capabilities in browser,
  * including permissions, to continue with the app flow
  */
-export function checkBrowerCapabilities () {
+export function checkBrowerCapabilities() {
   if (Notification.permission === 'denied') {
-    return Promise.resolve({ allowed: false, reason: 'blocked' })
+    return Promise.resolve({allowed: false, reason: 'blocked'})
   }
 
   // feature detect for push support in browser
   if (!('PushManager' in window)) {
-    return Promise.resolve({ allowed: false, reason: 'unsupported' })
+    return Promise.resolve({allowed: false, reason: 'unsupported'})
   }
 
   // feature detect with sw
@@ -63,7 +63,7 @@ export function checkBrowerCapabilities () {
 /**
  * Get a browser's push subscription
  */
-export function getSubscription () {
+export function getSubscription() {
   return navigator.serviceWorker.ready.then(registration => {
     return registration.pushManager.getSubscription()
   })
@@ -72,7 +72,7 @@ export function getSubscription () {
 /**
  * Request a push subscription from push server
  */
-export function subscribePush () {
+export function subscribePush() {
   return navigator.serviceWorker.ready.then(registration => {
     if (!registration.pushManager) {
       throw new Error({
@@ -105,7 +105,7 @@ export function subscribePush () {
  * @param {object} subscription
  * @param {string} token
  */
-export function sendSubscription (subscription, tokenData) {
+export function sendSubscription(subscription, tokenData) {
   const data = {
     subscription,
     sub_id: tokenData.sub_id,

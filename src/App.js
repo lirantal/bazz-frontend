@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
-import {
-  getSubscription,
-  sendSubscription,
-  checkBrowerCapabilities
-} from './helpers/pushApi'
-import { getToken } from './helpers/util'
+import {getSubscription, sendSubscription, checkBrowerCapabilities} from './helpers/pushApi'
+import {getToken} from './helpers/util'
 import errors from './common/errors'
 
 import ErrorPage from './components/ErrorPage'
@@ -13,11 +9,11 @@ import LoadingPage from './components/LoadingPage'
 import SubscribePage from './components/SubscribePage'
 import SubscriptionPage from './components/SubscriptionPage'
 
-import { Divider, Segment, Label, Container, Header } from 'semantic-ui-react'
+import {Divider, Segment, Label, Container, Header} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       isLoading: true,
@@ -61,7 +57,7 @@ class App extends Component {
    * Begin browser detection and support for push subscription
    * that may already exist in the user's browser
    */
-  async componentDidMount () {
+  async componentDidMount() {
     const token = getToken()
     if (!token) {
       return this.setPageError('token')
@@ -104,19 +100,14 @@ class App extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <Segment
-          inverted
-          textAlign='center'
-          style={{ minHeight: 700, padding: '1em 0em' }}
-          vertical
-        >
+        <Segment inverted textAlign="center" style={{minHeight: 700, padding: '1em 0em'}} vertical>
           <Container text>
             <Header
-              as='h5'
-              content='nice to meet you'
+              as="h5"
+              content="nice to meet you"
               inverted
               style={{
                 fontSize: '1em',
@@ -125,24 +116,24 @@ class App extends Component {
                 marginTop: '2em'
               }}
             />
-            <Label as='a' size='huge' style={{ marginTop: '0.5em' }} image>
+            <Label as="a" size="huge" style={{marginTop: '0.5em'}} image>
               <img
-                src='https://semantic-ui.com/images/avatar/large/elliot.jpg'
-                alt='my name is bazz'
+                src="https://semantic-ui.com/images/avatar/large/elliot.jpg"
+                alt="my name is bazz"
               />
               I'm bazz
             </Label>
           </Container>
-          <Divider inverted style={{ paddingTop: '1.2em' }} />
+          <Divider inverted style={{paddingTop: '1.2em'}} />
           <Divider horizontal inverted>
             your friendly bot
           </Divider>
           {<LoadingPage isLoading={this.state.isLoading} />}
           {<ErrorPage failure={this.state.failure} />}
-          {this.state.subscription &&
-            <SubscriptionPage subscription={this.state.subscription} />}
-          {this.state.promptSubsubscription === true &&
-            <SubscribePage onSubscribe={this.handleSubscribe} />}
+          {this.state.subscription && <SubscriptionPage subscription={this.state.subscription} />}
+          {this.state.promptSubsubscription === true && (
+            <SubscribePage onSubscribe={this.handleSubscribe} />
+          )}
         </Segment>
       </div>
     )
