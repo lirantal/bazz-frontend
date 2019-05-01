@@ -1,14 +1,10 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import {mount, shallow} from 'enzyme'
 
 import SubscribePage from '../SubscribePage'
 
 // Imported for mocks
-import {
-  subscribePush,
-  sendSubscription,
-  requestNotificationPermission
-} from '../../helpers/pushApi'
+import {subscribePush, sendSubscription, requestNotificationPermission} from '../../helpers/pushApi'
 
 jest.mock('../../helpers/pushApi.js', () => {
   return {
@@ -36,7 +32,7 @@ test('Subscribe page accepts a callback function for when the user subscribes', 
 test('Subscribe page renders a notify me button', () => {
   const page = mount(<SubscribePage onSubscribe={() => {}} />)
 
-  const b = page.find('Button').filter({ className: 'my-subscribe-button' })
+  const b = page.find('Button').filter({className: 'my-subscribe-button'})
   expect(b.text()).toEqual('Notify me!')
   page.unmount()
 })
@@ -48,8 +44,8 @@ test('Subscribe page calls subscribeUser handler upon clicked', () => {
   page.instance().subscribeUser = jest.fn()
   page.update()
 
-  const b = page.find('Button').filter({ className: 'my-subscribe-button' })
-  b.simulate('click', { preventDefault () {} })
+  const b = page.find('Button').filter({className: 'my-subscribe-button'})
+  b.simulate('click', {preventDefault() {}})
 
   expect(page.instance().subscribeUser).toHaveBeenCalled()
   page.unmount()
@@ -70,7 +66,7 @@ test('Subscribe page calls onSubscribe provided callback with error when notific
 
 test('Subscribe page calls onSubscribe provided callback with error when fails to subscribe to push notification', async () => {
   subscribePush.mockImplementationOnce(() =>
-    Promise.reject({ allowed: false, reason: 'unsupported' })
+    Promise.reject({allowed: false, reason: 'unsupported'})
   )
 
   const onSubscribeMock = jest.fn()
@@ -84,9 +80,7 @@ test('Subscribe page calls onSubscribe provided callback with error when fails t
 })
 
 test('Subscribe page calls onSubscribe provided callback with error when fails to send subscription', async () => {
-  sendSubscription.mockImplementationOnce(() =>
-    Promise.reject({ allowed: false })
-  )
+  sendSubscription.mockImplementationOnce(() => Promise.reject({allowed: false}))
 
   const onSubscribeMock = jest.fn()
   const page = mount(<SubscribePage onSubscribe={onSubscribeMock} />)

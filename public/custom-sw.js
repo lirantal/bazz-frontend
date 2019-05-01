@@ -1,6 +1,5 @@
-
-(function() {
-  self.addEventListener('push', (event) => {
+;(function() {
+  self.addEventListener('push', event => {
     /**
      * a push notification can contain rich metadata
      * such as a custom message from the application server
@@ -10,9 +9,8 @@
       // do something with event.data.text() 
     }
     */
-  
-    const title = 'Bazz up!';
-    event.waitUntil(self.registration.showNotification(title));
-  });
-})()
 
+    const title = 'Bazz up!'
+    event.waitUntil(self.registration.showNotification(title))
+  })
+})()

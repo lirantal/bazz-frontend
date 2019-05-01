@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Message, Segment } from 'semantic-ui-react'
+import {Message, Segment} from 'semantic-ui-react'
 import errors from '../common/errors'
 
 class ErrorPage extends Component {
-  render () {
+  render() {
     // this.props.failure can be one of:
     // * 'unsupported' - no support from browser
     // * 'blocked' - notifications blocked in browser
@@ -15,14 +15,10 @@ class ErrorPage extends Component {
     }
 
     return (
-      <Segment inverted basic style={{ marginTop: '7em' }}>
+      <Segment inverted basic style={{marginTop: '7em'}}>
         <Message negative>
-          <Message.Header>
-            Oh my!
-          </Message.Header>
-          <p>
-            {errors[this.props.failure] || errors['error']}
-          </p>
+          <Message.Header>Oh my!</Message.Header>
+          <p>{errors[this.props.failure] || errors['error']}</p>
         </Message>
       </Segment>
     )

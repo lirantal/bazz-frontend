@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  subscribePush,
-  sendSubscription,
-  requestNotificationPermission
-} from '../helpers/pushApi'
-import { getToken } from '../helpers/util'
+import {subscribePush, sendSubscription, requestNotificationPermission} from '../helpers/pushApi'
+import {getToken} from '../helpers/util'
 
-import { Label, Button, Container, Header } from 'semantic-ui-react'
+import {Label, Button, Container, Header} from 'semantic-ui-react'
 
 class SubscribePage extends Component {
   handleSubscribeClick = e => {
@@ -23,10 +19,7 @@ class SubscribePage extends Component {
    * - send subscription to application server
    */
   subscribeUser = async () => {
-    if (
-      !this.props.onSubscribe ||
-      typeof this.props.onSubscribe !== 'function'
-    ) {
+    if (!this.props.onSubscribe || typeof this.props.onSubscribe !== 'function') {
       return false
     }
 
@@ -61,29 +54,26 @@ class SubscribePage extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
-      <Container textAlign='center' style={{ marginTop: '6em' }}>
-        <Label basic size='medium' pointing='below'>
-          You need to hit the button
-          so I can send you a notification
-          when it's time.
+      <Container textAlign="center" style={{marginTop: '6em'}}>
+        <Label basic size="medium" pointing="below">
+          You need to hit the button so I can send you a notification when it's time.
         </Label>
         <Container>
           <Button
             positive
-            size='massive'
-            className='my-subscribe-button'
+            size="massive"
+            className="my-subscribe-button"
             onClick={this.handleSubscribeClick}
-            style={{ marginTop: '1em' }}
+            style={{marginTop: '1em'}}
           >
             Notify me!
           </Button>
         </Container>
-        <Container style={{ marginTop: '6em' }}>
-          <Header inverted as='h5' size='tiny'>
-            the browser will prompt you to
-            enable notifications
+        <Container style={{marginTop: '6em'}}>
+          <Header inverted as="h5" size="tiny">
+            the browser will prompt you to enable notifications
           </Header>
         </Container>
       </Container>
