@@ -29,6 +29,14 @@ To work with a local API server you can create a `.env.local` file without commi
 
 ## Build and serve the frontend
 
+Serve it with hot-reload:
+
+```bash
+$ npm run start
+```
+
+### Serving the production build
+
 Install http-server and use it to serve the files and proxy API requests to an API endpoint, i.e:
 
 ```bash
