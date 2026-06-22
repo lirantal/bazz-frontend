@@ -6,6 +6,8 @@ permissions: {}
 
 jobs:
   test:
+    env:
+      NODE_OPTIONS: --openssl-legacy-provider
     permissions:
       contents: read
     strategy:
