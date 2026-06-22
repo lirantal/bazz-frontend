@@ -10,7 +10,7 @@
   },
   "scripts": {
     "//start": "react-scripts build && cra-append-sw --skip-compile --mode dev ./custom-sw.js",
-    "build": "react-scripts build && cra-append-sw --skip-compile ./custom-sw.js",
+    "build": "react-scripts build && if [ -f build/service-worker.js ]; then cra-append-sw --skip-compile ./custom-sw.js; else echo \"Skipping service worker append; build/service-worker.js was not generated\"; fi",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
