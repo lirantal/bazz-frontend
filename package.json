@@ -21,13 +21,13 @@
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "cra-append-sw": "^2.0.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "react-test-renderer": "^16.2.0",
-    "@changesets/changelog-github": "^0.6.0",
+    "cra-append-sw": "^2.7.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.8",
+    "react-test-renderer": "^19.2.7",
+    "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
-    "markdownlint-cli": "0.45.0"
+    "markdownlint-cli": "0.49.0"
   },
   "publishConfig": {
     "provenance": true,
