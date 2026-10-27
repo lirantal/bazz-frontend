@@ -21,13 +21,14 @@
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
     "cra-append-sw": "^2.7.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "react-test-renderer": "^16.2.0",
-    "@changesets/changelog-github": "^1.0.0",
-    "@changesets/cli": "^2.31.0",
-    "markdownlint-cli": "0.45.0"
+    "markdownlint-cli": "0.45.0",
+    "prettier": "^3",
+    "react-test-renderer": "^16.2.0"
   },
   "publishConfig": {
     "provenance": true,
@@ -36,5 +37,17 @@
   "engines": {
     "node": ">=24.0.0",
     "npm": ">=11.10.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
